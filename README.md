@@ -1,11 +1,34 @@
-# S2VOPD
+<div align="center">
 
-**Self-Supervised Visual On-Policy Distillation** — teaching multimodal LLMs to see fine detail
-without rewards, human annotation, or a larger teacher.
+# S²VOPD
 
-A student model rolls out on a *degraded* view of an image while an EMA teacher scores the same
-prefix on the *clean* original. The gap between the two is the entire training signal: it is
+### Official implementation of [*Self-Supervised Visual On-Policy Distillation*](https://arxiv.org/abs/2608.14144)
+
+[![arXiv](https://img.shields.io/badge/arXiv-2608.14144-b31b1b.svg)](https://arxiv.org/abs/2608.14144)
+[![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://williamium3000.github.io/s2vopd/)
+[![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-S2Visual--OPD-yellow.svg)](https://huggingface.co/S2Visual-OPD)
+
+Yijiang Li · Yijun Liang · Yunjie Tian · Bingyang Wang · Ke Zhang · Zhenfei Yin · Di Fu · Philip Torr · Nuno Vasconcelos
+
+</div>
+
+---
+
+Teaching multimodal LLMs to see fine detail **without rewards, human annotation, or a larger teacher**.
+
+A student model generates on a *degraded* view of an image while an EMA teacher scores the same
+prefix on the *clean* original. The disagreement between the two is the entire training signal: it is
 large exactly on the tokens that depend on visual detail, and near zero everywhere else.
+
+## Links
+
+| | |
+|---|---|
+| Paper | https://arxiv.org/abs/2608.14144 |
+| Project page | https://williamium3000.github.io/s2vopd/ |
+| Code | https://github.com/williamium3000/s2vopd |
+| Models | https://huggingface.co/S2Visual-OPD |
+| Training data | [Vision-OPD-6K](https://huggingface.co/datasets/yuanqianhao/Vision-OPD-6K) |
 
 ## Models
 
@@ -39,10 +62,19 @@ BENCHMARK="vstar,zoombench,hrbench-4k,hrbench-8k,mme-realworld,mme-realworld-cn"
 bash eval/run_eval.sh
 ```
 
-## Training data
+## Citation
 
-[Vision-OPD-6K](https://huggingface.co/datasets/yuanqianhao/Vision-OPD-6K) — 6,241 examples;
-models above are trained for one epoch (65 steps).
+```bibtex
+@misc{li2026selfsupervisedvisualonpolicydistillation,
+  title={Self-Supervised Visual On-Policy Distillation},
+  author={Yijiang Li and Yijun Liang and Yunjie Tian and Bingyang Wang and Ke Zhang and Zhenfei Yin and Di Fu and Philip Torr and Nuno Vasconcelos},
+  year={2026},
+  eprint={2608.14144},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2608.14144},
+}
+```
 
 ## License
 

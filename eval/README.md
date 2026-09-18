@@ -1,6 +1,6 @@
-# S2VOPD Evaluation Suite
+# S²VOPD Evaluation Suite
 
-The evaluation harness used for all S2VOPD results. It talks to any **OpenAI-compatible
+The evaluation harness used for all S²VOPD results. It talks to any **OpenAI-compatible
 endpoint**, so the policy can be served by vLLM, SGLang, or a hosted API — the harness itself
 never loads model weights.
 
@@ -53,7 +53,7 @@ bash eval/run_eval.sh
 
 The long budget matters: at 16k tokens, 8–11% of generations still hit the cap on the math
 suite, which depresses scores. Math numbers produced under a 4096-token greedy protocol are
-not comparable to the ones reported for S2VOPD.
+not comparable to the ones reported for S²VOPD.
 
 ## Judging
 
