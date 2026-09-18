@@ -13,6 +13,11 @@ Pipeline per benchmark: `prepare_data.py` → `infer.py` → `judge_qwenlm.py` �
 pip install -r eval/requirements.txt
 ```
 
+`mathruler` is listed because the math benchmarks are graded symbolically first and only fall
+through to the LLM judge when that fails; without it the math numbers will not match the published
+ones. Running the judge locally instead of over an API additionally needs `torch`, `transformers`
+and `vllm`, which are intentionally left out of `requirements.txt`.
+
 ## Quick start
 
 Serve the policy (any OpenAI-compatible server), then:
@@ -78,7 +83,7 @@ or run it locally through vLLM with `JUDGE_MODEL_PATH=/path/to/Qwen2.5-72B-Instr
 | `TEMPERATURE` / `TOP_P` / `TOP_K` / `PRESENCE_PENALTY` | unset (greedy) | Sampling controls |
 | `PARALLEL_WORKERS` | `256` | Concurrent requests |
 | `MAX_RETRIES` | `3` | Retries per sample |
-| `OUT_DIR` | `model_answer` | Where raw generations go |
+| `OUT_DIR` | `model_answer` | Where raw generations go (passed to both inference and the judge) |
 | `JUDGE_API_BASE` / `JUDGE_MODEL` | unset | Judge served over an API |
 | `JUDGE_MODEL_PATH` | unset | Judge loaded locally via vLLM |
 | `JUDGE_MAX_TOKENS` | `2048` | Judge generation budget |

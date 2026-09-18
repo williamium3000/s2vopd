@@ -228,6 +228,12 @@ def main():
     parser.add_argument("--api_key", default="EMPTY", type=str)
     parser.add_argument("--judge_model", default=None, type=str, help="Model name for API-based judging")
     parser.add_argument("--judge_max_tokens", default=2048, type=int)
+    parser.add_argument(
+        "--answer_dir",
+        default="model_answer",
+        type=str,
+        help="Directory infer.py wrote its generations to (must match infer.py --out_dir).",
+    )
     args = parser.parse_args()
 
     if not args.api_base and not args.judge_model_path:
@@ -238,12 +244,20 @@ def main():
         )
         sys.exit(1)
 
-    answer_path = f"model_answer/{args.benchmark}/{args.model}_answer.jsonl"
+    answer_path = f"{args.answer_dir}/{args.benchmark}/{args.model}_answer.jsonl"
     save_path = f"judge/{args.benchmark}/{args.model}_answer.jsonl"
     os.makedirs(f"judge/{args.benchmark}", exist_ok=True)
     is_mcq = args.benchmark in MCQ_BENCHMARKS
     is_pope = args.benchmark in POPE_BENCHMARKS
     is_mmvp = args.benchmark in MMVP_BENCHMARKS
+
+    if not os.path.exists(answer_path):
+        print(
+            f"ERROR: no generations at {answer_path}. Run infer.py first, and make sure its "
+            f"--out_dir matches --answer_dir (currently {args.answer_dir!r}).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     data_list = []
     with open(answer_path, "r", encoding="utf-8") as f:

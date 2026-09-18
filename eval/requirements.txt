@@ -1,6 +1,10 @@
 openai>=1.0
 huggingface_hub>=0.23
 datasets>=2.18
+pyarrow>=15.0
 pillow>=10.0
 jinja2>=3.1
 tqdm>=4.66
+# Symbolic grading for the math benchmarks. Without it every math answer falls through to the
+# LLM judge, which is slower and does not reproduce the published math numbers.
+mathruler==0.1.0

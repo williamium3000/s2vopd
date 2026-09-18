@@ -772,6 +772,25 @@ def main():
             json.dump(data, f, ensure_ascii=False, indent=2)
         print(f"Generated: {out_json} (records={len(data)})")
 
+    elif benchmark == "mathvision-op":
+        print(
+            "mathvision-op is the official-prompt variant of mathvision; its JSON is derived from "
+            "mathvision.json rather than downloaded. Prepare 'mathvision' first, then build "
+            f"{out_json.name} from it.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    else:
+        # Without this, an unsupported benchmark used to exit 0 having written nothing, and the
+        # failure only surfaced later as a missing-file error inside infer.py.
+        print(
+            f"Unsupported benchmark: {benchmark}. Supported: "
+            + ", ".join(sorted(BENCHMARK_JSON_MAP)),
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

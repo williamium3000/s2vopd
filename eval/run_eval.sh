@@ -124,7 +124,7 @@ run_single_benchmark() {
 
   # [3/4] Judge
   echo "[3/4] Running judge..."
-  local -a JUDGE_ARGS=()
+  local -a JUDGE_ARGS=(--answer_dir "${OUT_DIR}")
   [[ -n "${JUDGE_API_BASE}" ]] && JUDGE_ARGS+=(--api_base "${JUDGE_API_BASE}")
   [[ -n "${JUDGE_API_KEY}" ]] && JUDGE_ARGS+=(--api_key "${JUDGE_API_KEY}")
   [[ -n "${JUDGE_MODEL}" ]] && JUDGE_ARGS+=(--judge_model "${JUDGE_MODEL}")
