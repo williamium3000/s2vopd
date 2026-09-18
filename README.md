@@ -8,17 +8,34 @@
 [![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://williamium3000.github.io/s2vopd/)
 [![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-S2Visual--OPD-yellow.svg)](https://huggingface.co/S2Visual-OPD)
 
-Yijiang Li · Yijun Liang · Yunjie Tian · Bingyang Wang · Ke Zhang · Zhenfei Yin · Di Fu · Philip Torr · Nuno Vasconcelos
+Yijiang Li, Yijun Liang, Yunjie Tian, Bingyang Wang, Ke Zhang, Zhenfei Yin, Di Fu, Philip Torr, Nuno Vasconcelos
 
 </div>
 
 ---
 
-Teaching multimodal LLMs to see fine detail **without rewards, human annotation, or a larger teacher**.
+## Abstract
 
-A student model generates on a *degraded* view of an image while an EMA teacher scores the same
-prefix on the *clean* original. The disagreement between the two is the entire training signal: it is
-large exactly on the tokens that depend on visual detail, and near zero everywhere else.
+Visual on-policy distillation relies heavily on an informative teacher-student asymmetry, through
+either a larger, stronger teacher or privileged supervision, such as reference answers or
+ground-truth regions of interest. This raises a fundamental question: where can informative
+asymmetry come from when nothing privileged is available? We answer this by inverting where the
+asymmetry comes from. Rather than adding privileged information to the teacher, we subtract
+information from the student. This asymmetry creates the same effective learning signal for free as
+a teacher with access to information unavailable to the student, without ground-truth annotations,
+rewards, or a separate stronger teacher model. Building on this principle, we introduce
+Self-Supervised Visual On-Policy Distillation (S²VOPD), a simple yet effective method that
+constructs on-policy learning signals from asymmetric augmented views. S²VOPD distills the teacher's
+distribution conditioned on the original image on-policy into the student distribution conditioned
+on a strongly augmented view of the same image. We systematically explore a broad design space of
+visual augmentations and uncover that (1) **asymmetry matters**: all four augmentation families
+improve performance, while symmetric self-distillation degrades it; (2) **strength matters**:
+performance peaks at a moderate strength; and (3) **the gap must remain task-consistent**:
+augmentations that completely remove the question-relevant evidence can induce large but
+uninformative discrepancies. Across six fine-grained perception benchmarks, S²VOPD improves
+Qwen3.5-4B from 70.7% to 77.4%, above all open-source models compared, up to Qwen3-VL at 235B, and
+surpasses GPT-5.4. While holding training data the same, it recovers 96% of the improvement achieved
+by methods with privileged information.
 
 ## Models
 
