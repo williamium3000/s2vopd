@@ -7,6 +7,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2608.14144-b31b1b.svg)](https://arxiv.org/abs/2608.14144)
 [![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://williamium3000.github.io/s2vopd/)
 [![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-S2Visual--OPD-yellow.svg)](https://huggingface.co/S2Visual-OPD)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Data-Vision--OPD--6K-yellow.svg)](https://huggingface.co/datasets/yuanqianhao/Vision-OPD-6K)
 
 Yijiang Li · Yijun Liang · Yunjie Tian · Bingyang Wang · Ke Zhang · Zhenfei Yin · Di Fu · Philip Torr · Nuno Vasconcelos
 
@@ -19,16 +20,6 @@ Teaching multimodal LLMs to see fine detail **without rewards, human annotation,
 A student model generates on a *degraded* view of an image while an EMA teacher scores the same
 prefix on the *clean* original. The disagreement between the two is the entire training signal: it is
 large exactly on the tokens that depend on visual detail, and near zero everywhere else.
-
-## Links
-
-| | |
-|---|---|
-| Paper | https://arxiv.org/abs/2608.14144 |
-| Project page | https://williamium3000.github.io/s2vopd/ |
-| Code | https://github.com/williamium3000/s2vopd |
-| Models | https://huggingface.co/S2Visual-OPD |
-| Training data | [Vision-OPD-6K](https://huggingface.co/datasets/yuanqianhao/Vision-OPD-6K) |
 
 ## Models
 
