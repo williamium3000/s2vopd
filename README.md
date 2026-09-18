@@ -32,10 +32,7 @@ visual augmentations and uncover that (1) **asymmetry matters**: all four augmen
 improve performance, while symmetric self-distillation degrades it; (2) **strength matters**:
 performance peaks at a moderate strength; and (3) **the gap must remain task-consistent**:
 augmentations that completely remove the question-relevant evidence can induce large but
-uninformative discrepancies. Across six fine-grained perception benchmarks, S²VOPD improves
-Qwen3.5-4B from 70.7% to 77.4%, above all open-source models compared, up to Qwen3-VL at 235B, and
-surpasses GPT-5.4. While holding training data the same, it recovers 96% of the improvement achieved
-by methods with privileged information.
+uninformative discrepancies.
 
 ## Models
 
