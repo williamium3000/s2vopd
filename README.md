@@ -6,7 +6,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2608.14144-b31b1b.svg)](https://arxiv.org/abs/2608.14144)
 [![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://williamium3000.github.io/s2vopd/)
-[![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-S2Visual--OPD-yellow.svg)](https://huggingface.co/S2Visual-OPD)
+[![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-s2vopd-yellow.svg)](https://huggingface.co/s2vopd)
 
 Yijiang Li, Yijun Liang, Yunjie Tian, Bingyang Wang, Ke Zhang, Zhenfei Yin, Di Fu, Philip Torr, Nuno Vasconcelos
 
@@ -38,8 +38,8 @@ uninformative discrepancies.
 
 | Model | Perception (6) | Math (4) |
 |---|---|---|
-| [S2VOPD-Qwen3.5-4B](https://huggingface.co/S2Visual-OPD/S2VOPD-Qwen3.5-4B) | 76.94 | 76.32 |
-| [S2VOPD-Qwen3.5-9B](https://huggingface.co/S2Visual-OPD/S2VOPD-Qwen3.5-9B) | 77.81 | 78.65 |
+| [S2VOPD-Qwen3.5-4B](https://huggingface.co/s2vopd/S2VOPD-Qwen3.5-4B) | 76.94 | 76.32 |
+| [S2VOPD-Qwen3.5-9B](https://huggingface.co/s2vopd/S2VOPD-Qwen3.5-9B) | 77.81 | 78.65 |
 
 Perception = V\* Bench, ZoomBench, HR-Bench 4K/8K, MME-RealWorld EN/CN (greedy, 4096 tokens).
 Math = MathVista, MathVerse, MathVision, WeMath (24576 tokens, T=0.3, judged by Qwen2.5-72B-Instruct).
