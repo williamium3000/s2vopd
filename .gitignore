@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+model_answer/
+judge/
+*.json
+!eval/requirements.txt
+summary_*.txt

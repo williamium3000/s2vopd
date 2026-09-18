@@ -1,0 +1,6 @@
+openai>=1.0
+huggingface_hub>=0.23
+datasets>=2.18
+pillow>=10.0
+jinja2>=3.1
+tqdm>=4.66
