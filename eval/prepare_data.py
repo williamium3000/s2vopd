@@ -589,9 +589,9 @@ def prepare_mathvision(out_dir):
 
 
 def prepare_wemath(out_dir):
-    """Build wemath.json from the VLMEvalKit WeMath TSV when available (exact
-    prompt parity with their ImageMCQ build_prompt: Hint/Question/multiline
-    Options/'Please select...'), falling back to the HF release otherwise."""
+    """Build wemath.json from the VLMEvalKit WeMath TSV (exact prompt parity with their
+    ImageMCQ build_prompt: Hint/Question/multiline Options/'Please select...'). The TSV is
+    required; there is no fallback, since another build would change the prompts."""
     import base64
     import string as _string
 
@@ -602,7 +602,10 @@ def prepare_wemath(out_dir):
 
     tsv = Path(os.environ.get("LMUData", str(Path.home() / "LMUData"))) / "WeMath.tsv"
     if not tsv.exists():
-        raise FileNotFoundError(f"{tsv} not found — download via VLMEvalKit first (protocol parity source)")
+        raise FileNotFoundError(
+            f"{tsv} not found. Download VLMEvalKit's WeMath.tsv (listed in vlmeval/dataset/image_mcq.py, "
+            "md5 b5e969a075f01290a542411fb7766388) and place it there, or set LMUData to its directory."
+        )
 
     df = pd.read_csv(tsv, sep="\t")
     data = []

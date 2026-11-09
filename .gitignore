@@ -1,7 +1,9 @@
 __pycache__/
-*.pyc
-model_answer/
-judge/
-*.json
-!eval/requirements.txt
-summary_*.txt
+*.py[cod]
+*.egg-info/
+.venv/
+/data/
+outputs/
+checkpoints/
+wandb/
+*.log

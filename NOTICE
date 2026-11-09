@@ -1,0 +1,9 @@
+S²VOPD — Self-Supervised Visual On-Policy Distillation
+
+This product includes software developed as part of verl
+(https://github.com/volcengine/verl), Copyright 2024 Bytedance Ltd. and/or its
+affiliates, licensed under the Apache License, Version 2.0.
+
+Modifications in this repository add self-supervised visual on-policy distillation:
+the student-view augmentation space, the dual-view (augmented student / clean teacher)
+data path, the EMA self-teacher, and the optional contrast-sharpened distillation target.

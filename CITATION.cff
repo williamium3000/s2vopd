@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "S²VOPD: Self-Supervised Visual On-Policy Distillation"
+authors:
+  - family-names: Li
+    given-names: Yijiang
+  - family-names: Liang
+    given-names: Yijun
+  - family-names: Tian
+    given-names: Yunjie
+  - family-names: Wang
+    given-names: Bingyang
+  - family-names: Zhang
+    given-names: Ke
+  - family-names: Yin
+    given-names: Zhenfei
+  - family-names: Fu
+    given-names: Di
+  - family-names: Torr
+    given-names: Philip
+  - family-names: Vasconcelos
+    given-names: Nuno
+year: 2026
+license: Apache-2.0
+repository-code: "https://github.com/williamium3000/s2vopd"
+preferred-citation:
+  type: article
+  title: "Self-Supervised Visual On-Policy Distillation"
+  year: 2026
+  journal: "arXiv preprint arXiv:2608.14144"
+  url: "https://arxiv.org/abs/2608.14144"
+  authors:
+    - family-names: Li
+      given-names: Yijiang

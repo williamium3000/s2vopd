@@ -171,9 +171,11 @@ def judge_via_api(prompts, api_base, api_key, judge_model, judge_max_tokens, par
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
     results = [""] * len(prompts)
+    failures = []
 
     def call_one(idx, prompt):
         client = get_client()
+        err = None
         for attempt in range(3):
             try:
                 resp = client.chat.completions.create(
@@ -182,17 +184,32 @@ def judge_via_api(prompts, api_base, api_key, judge_model, judge_max_tokens, par
                     temperature=0,
                     max_tokens=judge_max_tokens,
                 )
-                return idx, (resp.choices[0].message.content or "").strip()
-            except Exception:
+                return idx, (resp.choices[0].message.content or "").strip(), None
+            except Exception as e:
+                err = e
                 if attempt < 2:
                     time.sleep(1.0)
-        return idx, "No"
+        return idx, None, err
 
     with ThreadPoolExecutor(max_workers=parallel_workers) as executor:
         futures = [executor.submit(call_one, i, p) for i, p in enumerate(prompts)]
         for future in tqdm(as_completed(futures), total=len(futures), desc="LLM Judge"):
-            idx, text = future.result()
-            results[idx] = text
+            idx, text, err = future.result()
+            if err is not None:
+                failures.append((idx, err))
+            else:
+                results[idx] = text
+
+    # A failed judge call must not be scored: recording it as "No" would be indistinguishable
+    # from a real "No" and silently lower the accuracy (e.g. prompts longer than the judge
+    # server's --max-model-len). Fail before anything is written so the run can be fixed and redone.
+    if failures:
+        idx, err = min(failures, key=lambda f: f[0])
+        raise RuntimeError(
+            f"{len(failures)}/{len(prompts)} LLM-judge calls failed after 3 attempts; no judge file was "
+            f"written. First failure (prompt {idx}): {type(err).__name__}: {err}. If the error is a "
+            f"context-length one, serve the judge with a larger --max-model-len (>= 32768)."
+        )
 
     return results
 

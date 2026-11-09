@@ -26,12 +26,17 @@ Serve the policy (any OpenAI-compatible server), then:
 API_BASE="http://localhost:8000/v1/" \
 OPENAI_MODEL_ID="S2VOPD-Qwen3.5-4B" \
 BENCHMARK="vstar,zoombench,hrbench-4k,hrbench-8k,mme-realworld,mme-realworld-cn" \
+JUDGE_API_BASE="http://localhost:8001/v1/" JUDGE_MODEL="Qwen2.5-72B-Instruct" \
 bash eval/run_eval.sh
 ```
 
 Benchmark data is downloaded from the Hugging Face Hub on first use and cached next to the
 scripts. Results land in `model_answer/`, judge outputs in `judge/`, and accuracy is printed
-per benchmark.
+per benchmark. A judge endpoint is required for every benchmark (rule-based grading falls back
+to the LLM judge). WeMath is the exception to the automatic download: it needs VLMEvalKit's
+`WeMath.tsv` at `~/LMUData/WeMath.tsv` (md5 `b5e969a075f01290a542411fb7766388`). Cached
+generations are reused on rerun regardless of decoding settings, so change `MODEL_NAME` or
+`OUT_DIR` when you change them.
 
 ## Protocols
 
@@ -50,7 +55,7 @@ bash eval/run_eval.sh
 
 ```bash
 API_BASE=... OPENAI_MODEL_ID=... SEED=42 \
-MAX_TOKENS=24576 TEMPERATURE=0.6 TOP_P=0.95 TOP_K=20 PRESENCE_PENALTY=1.5 \
+MAX_TOKENS=24576 TEMPERATURE=0.3 TOP_P=0.95 TOP_K=20 PRESENCE_PENALTY=1.5 \
 BENCHMARK="mathvista,mathverse,mathvision,wemath" \
 JUDGE_API_BASE="http://localhost:8001/v1/" JUDGE_MODEL="Qwen2.5-72B-Instruct" \
 bash eval/run_eval.sh
