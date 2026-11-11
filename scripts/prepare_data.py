@@ -65,16 +65,26 @@ def clean_question(problem: str) -> str:
     return text.strip()
 
 
+def strip_hint(problem: str) -> str:
+    return problem.replace(f"\n\n{REMOVE_HINT}", "").replace(REMOVE_HINT, "")
+
+
 def build_record(item: dict[str, Any], data_dir: str) -> dict[str, Any]:
     # Box-free setting: the image is the original one (no bounding box drawn) and the
     # red-box hint is stripped from the question. The dataset wrapper augments this image
     # for the student and keeps a clean copy for the teacher (`weak_images`).
     image_path = os.path.join(data_dir, item["original_images"][0])
-    question = clean_question(item.get("problem", ""))
+    problem = item.get("problem", "")
+    question = clean_question(problem)
+    # The prompt is the original problem with only the hint removed, so it keeps the dataset's
+    # own "<image>\n<question>" layout -- exactly the prompts the reported models were trained on.
+    # Rebuilding it from `question` would change the text right after the image for every sample.
+    prompt = strip_hint(problem)
+    assert REMOVE_HINT not in prompt and "<image>" in prompt, prompt[:200]
 
     return {
         "data_source": "vision_opd_6k",
-        "prompt": [{"role": "user", "content": f"<image> {question}"}],
+        "prompt": [{"role": "user", "content": prompt}],
         "images": [{"path": image_path}],
         "ability": "visual_question_answering",
         "reward_model": {
